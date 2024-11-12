@@ -104,7 +104,7 @@ public class EditarCuentaController implements Initializable {
     provincias.add("Huesca");
     provincias.add("Islas Baleares");
     provincias.add("Jaén");
-    provincias.add("La Corunya");
+    provincias.add("La Coruña");
     provincias.add("La Rioja");
     provincias.add("Las Palmas");
     provincias.add("León");
@@ -208,25 +208,43 @@ public class EditarCuentaController implements Initializable {
   }
 
   /**
-   * Regresa a la vista principal.
-   *
-   * @param event El evento de ratón que dispara el método.
-   * @throws IOException Si ocurre un error de E/S.
+   * Maneja el evento de clic para volver atrás.
+   * 
+   * @param event El evento de clic del ratón.
+   * @throws IOException Si ocurre un error al cargar la vista.
    */
   @FXML
   void atras(MouseEvent event) throws IOException {
     String usuario = LoginController.mostrarNombreUsuario();
     cuenta = CRUDFirebase.obtenerDatosCuenta(usuario);
 
-    FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/PrincipalView.fxml"));
-    borderPane = loader.load();
-    PrincipalController control = loader.getController();
-    Scene escena = new Scene(borderPane);
-    Stage stage = new Stage();
-    stage.setScene(escena);
-    stage.initStyle(StageStyle.UNDECORATED); // Quita la barra de título
-    control.initEditarCuenta(stage, this, cuenta.getNombre(), borderPane, cuenta.getTipo());
-    stage.show();
+    // Seleccionar la vista en función del tipo de cuenta
+    String viewPath = cuenta.getTipo().equalsIgnoreCase("Administrador") ? "/views/PrincipalAdminView.fxml"
+        : "/views/PrincipalView.fxml";
+
+    // Cargar la vista seleccionada
+    FXMLLoader loader = new FXMLLoader(getClass().getResource(viewPath));
+    BorderPane newBorderPane = loader.load();
+
+    // Crear y configurar el nuevo escenario
+    Stage newStage = new Stage();
+    newStage.initStyle(StageStyle.UNDECORATED);
+    Scene escena = new Scene(newBorderPane);
+    newStage.setScene(escena);
+
+    // Obtener el controlador correspondiente y llamarlo
+    if (cuenta.getTipo().equalsIgnoreCase("Administrador")) {
+      PrincipalAdminController control = loader.getController();
+      control.initEditarCuenta(newStage, this, cuenta.getNombre(), newBorderPane, cuenta.getTipo());
+    } else {
+      PrincipalController control = loader.getController();
+      control.initEditarCuenta(newStage, this, cuenta.getNombre(), newBorderPane, cuenta.getTipo());
+    }
+
+    // Mostrar el nuevo escenario
+    newStage.show();
+
+    // Cerrar la ventana actual si existe
     if (this.stage != null) {
       this.stage.close();
     }

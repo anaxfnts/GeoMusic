@@ -60,7 +60,8 @@ public class VerCuentaController implements Initializable {
    * Método para establecer los datos de la cuenta.
    * 
    * @param cuentas La cuenta cuyos datos se van a mostrar.
-   * @throws FileNotFoundException Si no se encuentra el archivo con los datos de la cuenta.
+   * @throws FileNotFoundException Si no se encuentra el archivo con los datos de
+   *                               la cuenta.
    */
   public void setDatos(Cuenta cuentas) throws FileNotFoundException {
     cuenta = cuentas;
@@ -100,7 +101,7 @@ public class VerCuentaController implements Initializable {
     provincias.add("Huesca");
     provincias.add("Islas Baleares");
     provincias.add("Jaén");
-    provincias.add("La Corunya");
+    provincias.add("La Coruña");
     provincias.add("La Rioja");
     provincias.add("Las Palmas");
     provincias.add("León");
@@ -141,15 +142,33 @@ public class VerCuentaController implements Initializable {
     String usuario = LoginController.mostrarNombreUsuario();
     cuenta = CRUDFirebase.obtenerDatosCuenta(usuario);
 
-    FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/PrincipalView.fxml"));
-    BorderPane newBorderPane = loader.load(); // Cargar el nuevo BorderPane
-    PrincipalController control = loader.getController();
-    Scene escena = new Scene(newBorderPane); // Crear una nueva escena con el nuevo BorderPane
+    // Seleccionar la vista en función del tipo de cuenta
+    String viewPath = cuenta.getTipo().equalsIgnoreCase("Administrador") ? "/views/PrincipalAdminView.fxml"
+        : "/views/PrincipalView.fxml";
+
+    // Cargar la vista seleccionada
+    FXMLLoader loader = new FXMLLoader(getClass().getResource(viewPath));
+    BorderPane newBorderPane = loader.load();
+
+    // Crear y configurar el nuevo escenario
     Stage newStage = new Stage();
-    newStage.initStyle(StageStyle.UNDECORATED); // Aquí se quita la barra de título
+    newStage.initStyle(StageStyle.UNDECORATED);
+    Scene escena = new Scene(newBorderPane);
     newStage.setScene(escena);
-    control.initVerCuenta(newStage, this, cuenta.getNombre(), newBorderPane, cuenta.getTipo());
+
+    // Obtener el controlador correspondiente y llamarlo
+    if (cuenta.getTipo().equalsIgnoreCase("Administrador")) {
+      PrincipalAdminController control = loader.getController();
+      control.initVerCuenta(newStage, this, cuenta.getNombre(), newBorderPane, cuenta.getTipo());
+    } else {
+      PrincipalController control = loader.getController();
+      control.initVerCuenta(newStage, this, cuenta.getNombre(), newBorderPane, cuenta.getTipo());
+    }
+
+    // Mostrar el nuevo escenario
     newStage.show();
+
+    // Cerrar la ventana actual si existe
     if (this.stage != null) {
       this.stage.close();
     }
@@ -199,7 +218,7 @@ public class VerCuentaController implements Initializable {
     FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/EditarCuentaView.fxml"));
     BorderPane editarCuentaView = loader.load();
     EditarCuentaController editarCuentaController = loader.getController();
-    
+
     // Crear una nueva escena con la vista cargada
     Scene nuevaEscena = new Scene(editarCuentaView);
 
@@ -217,11 +236,13 @@ public class VerCuentaController implements Initializable {
   }
 
   /**
-   * Inicializa el controlador. Este método se llama automáticamente
-   * después de cargar el archivo FXML.
+   * Inicializa el controlador. Este método se llama automáticamente después de
+   * cargar el archivo FXML.
    * 
-   * @param location La ubicación utilizada para resolver rutas relativas para el objeto raíz, o null si la ubicación no se conoce.
-   * @param resources Los recursos utilizados para localizar el objeto raíz, o null si no se han localizado recursos.
+   * @param location  La ubicación utilizada para resolver rutas relativas para el
+   *                  objeto raíz, o null si la ubicación no se conoce.
+   * @param resources Los recursos utilizados para localizar el objeto raíz, o
+   *                  null si no se han localizado recursos.
    */
   @Override
   public void initialize(URL location, ResourceBundle resources) {

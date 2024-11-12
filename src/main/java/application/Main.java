@@ -1,64 +1,83 @@
 package application;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 import firebase.CRUDFirebase;
 import javafx.application.Application;
+import javafx.concurrent.Task;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import utils.TicketmasterApi;
 import views.PreviaController;
 
-/**
- * Clase principal de la aplicación que extiende de Application. Se encarga de
- * iniciar y configurar la aplicación.
- */
 public class Main extends Application {
 
-  /**
-   * Método start para iniciar la aplicación. Configura el estilo de la ventana,
-   * carga la vista inicial y establece el controlador.
-   *
-   * @param primaryStage el escenario principal de la aplicación.
-   * @throws IOException si ocurre un error durante la carga de la vista.
-   */
-  @Override
-  public void start(Stage primaryStage) throws IOException {
+    @Override
+    public void start(Stage primaryStage) throws IOException {
 
-    // Configurar el estilo de la ventana para eliminar los botones de minimizar,
-    // maximizar y mover
-    primaryStage.initStyle(StageStyle.UNDECORATED);
+        primaryStage.initStyle(StageStyle.UNDECORATED);
+        primaryStage.setOnCloseRequest(event -> {
+            event.consume();
+            System.out.println("Cerrar la ventana está deshabilitado.");
+        });
 
-    // Interceptar el evento de cierre para evitar que la ventana se cierre
-    primaryStage.setOnCloseRequest(event -> {
-      // Consume el evento para evitar que la ventana se cierre
-      event.consume();
-      System.out.println("Cerrar la ventana está deshabilitado.");
-    });
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/PreviaView.fxml"));
+        Parent root = loader.load();
+        Scene escena = new Scene(root);
+        primaryStage.setScene(escena);
+        PreviaController controlador = loader.getController();
+        controlador.setStage(primaryStage);
+        primaryStage.setMaximized(true);
+        primaryStage.setResizable(false);
+        primaryStage.getIcons().add(new Image("/images/logo.png"));
+        primaryStage.setTitle("GeoMusic");
+        primaryStage.show();
 
-    // Carga la primera vista de la aplicación así como el icono de esta
-    FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/PreviaView.fxml"));
-    Parent root = loader.load();
-    Scene escena = new Scene(root);
-    primaryStage.setScene(escena);
-    PreviaController controlador = loader.getController();
-    controlador.setStage(primaryStage);
-    primaryStage.setMaximized(true);
-    primaryStage.setResizable(false);
-    primaryStage.getIcons().add(new Image("/images/logo.png"));
-    primaryStage.setTitle("GeoMusic");
-    primaryStage.show();
-    CRUDFirebase conexion = new CRUDFirebase();
-  }
+        CRUDFirebase conexion = new CRUDFirebase();
 
-  /**
-   * Método main para ejecutar la aplicación.
-   *
-   * @param args los argumentos de la línea de comandos.
-   */
-  public static void main(String[] args) {
-    launch(args);
-  }
+        Task<Void> task = new Task<Void>() {
+            @Override
+            protected Void call() {
+                TicketmasterApi api = new TicketmasterApi();
+
+                // Lista de ciudades en lugar de provincias
+                List<String> ciudades = Arrays.asList(
+                    "Alava", "Albacete", "Alicante", "Almeria", "Asturias", "Avila", 
+                    "Badajoz", "Baleares", "Barcelona", "Burgos", "Caceres", "Cadiz", 
+                    "Cantabria", "Castellon", "Ceuta", "Ciudad Real", "Cordoba", "Cuenca", 
+                    "Girona", "Granada", "Guadalajara", "Guipuzcoa", "Huelva", "Huesca", 
+                    "Jaen", "La Coruna", "La Rioja", "Las Palmas", "Leon", "Lleida", 
+                    "Lugo", "Madrid", "Malaga", "Melilla", "Murcia", "Navarra", 
+                    "Ourense", "Palencia", "Pontevedra", "Salamanca", "Santa Cruz de Tenerife", 
+                    "Segovia", "Sevilla", "Soria", "Tarragona", "Teruel", "Toledo", 
+                    "Valencia", "Valladolid", "Vizcaya", "Zamora", "Zaragoza"
+                );
+
+
+                // Procesar y subir conciertos de cada ciudad
+                for (String ciudad : ciudades) {
+                    try {
+                        System.out.println("Subiendo conciertos para la ciudad: " + ciudad);
+                        api.procesarYSubirConciertos(ciudad); // Cambiado para trabajar con ciudad
+                    } catch (Exception e) {
+                        System.err.println("Error al subir conciertos de la ciudad " + ciudad + ": " + e.getMessage());
+                    }
+                }
+                return null;
+            }
+        };
+
+        Thread hilo = new Thread(task);
+        hilo.setDaemon(true);
+        hilo.start();
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
 }

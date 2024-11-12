@@ -44,7 +44,7 @@ public class LoginController implements Initializable {
   @FXML
   private Button btnAtras;
 
-  // Campo de contrasenya.
+  // Campo de contraseña.
   @FXML
   private PasswordField txtPassword;
 
@@ -79,38 +79,58 @@ public class LoginController implements Initializable {
     String passwdConsultado = CRUDFirebase.consultarPasswd(usuario);
 
     try {
-      if (usuarioConsultado.equalsIgnoreCase(usuario) && passwdConsultado.equalsIgnoreCase(hasPass)) {
-        registrado = true;
-        comprobar = CRUDFirebase.obtenerDatosCuenta(usuario);
-        loggedInUserMail = CRUDFirebase.consultarCorreo(usuario);
+        if (usuarioConsultado.equalsIgnoreCase(usuario) && passwdConsultado.equalsIgnoreCase(hasPass)) {
+            registrado = true;
+            comprobar = CRUDFirebase.obtenerDatosCuenta(usuario);
+            loggedInUserMail = CRUDFirebase.consultarCorreo(usuario);
 
-        // Si coinciden los datos, inicia la vista principal de la aplicación.
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/PrincipalView.fxml"));
-        root = loader.load();
-        PrincipalController control = loader.getController();
-        Scene escena = new Scene(root);
-        Stage stage = new Stage();
-        stage.setScene(escena);
-        control.initLogin(stage, this, comprobar.getNombre(), root, comprobar.getTipo());
-        stage.show();
+            // Verificamos el tipo de usuario y asignamos el archivo FXML correspondiente
+            String tipoUsuario = comprobar.getTipo();
+            String fxmlFile;
 
-        if (this.stage != null) {
-          this.stage.close();
+            if ("Administrador".equalsIgnoreCase(tipoUsuario)) {
+                fxmlFile = "/views/PrincipalAdminView.fxml"; // Vista de administrador
+            } else {
+                fxmlFile = "/views/PrincipalView.fxml"; // Vista de usuario normal
+            }
+
+            // Cargar la vista correspondiente
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
+            root = loader.load();
+            Scene escena = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(escena);
+
+            // Obtenemos el controlador y verificamos su tipo para inicializar correctamente
+            if ("Administrador".equalsIgnoreCase(tipoUsuario)) {
+                PrincipalAdminController adminControl = loader.getController();
+                adminControl.initLogin(stage, this, comprobar.getNombre(), root, tipoUsuario);
+            } else {
+                PrincipalController userControl = loader.getController();
+                userControl.initLogin(stage, this, comprobar.getNombre(), root, tipoUsuario);
+            }
+
+            stage.show();
+
+            // Cerrar la ventana de login actual, si está abierta
+            if (this.stage != null) {
+                this.stage.close();
+            }
+
+        } else if (usuario.isEmpty() || passwd.isEmpty()) {
+            registrado = false;
+            alertaVacio();
+
+        } else {
+            registrado = false;
+            alertaError();
         }
 
-      } else if (usuario.isEmpty() || passwd.isEmpty()) {
-        registrado = false;
-        alertaVacio();
-
-      } else {
-        registrado = false;
-        alertaError();
-      }
-
     } catch (NullPointerException e) {
-      alertaError();
+        alertaError();
     }
-  }
+}
+
 
   /**
    * Vuelve a la pantalla previa de la aplicación.
@@ -149,7 +169,7 @@ public class LoginController implements Initializable {
   public static void alertaError() {
     Alert alert = new Alert(Alert.AlertType.ERROR);
     alert.setTitle("Error");
-    alert.setContentText("Usuario no existe: comprueba tu usuario y tu contrasenya.");
+    alert.setContentText("Usuario no existe: comprueba tu usuario y tu contraseña.");
     alert.showAndWait();
   }
 

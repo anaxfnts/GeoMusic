@@ -90,7 +90,7 @@ public class CrearCuentaController implements Initializable {
     provincias.add("Huesca");
     provincias.add("Islas Baleares");
     provincias.add("Jaén");
-    provincias.add("La Corunya");
+    provincias.add("La Coruña");
     provincias.add("La Rioja");
     provincias.add("Las Palmas");
     provincias.add("León");
@@ -150,7 +150,7 @@ public class CrearCuentaController implements Initializable {
         @SuppressWarnings("unused")
         WriteResult writeResult = docRef.set(cuenta).get();
 
-        System.out.println("Cuenta anyadida con ID: " + usuario);
+        System.out.println("Cuenta añadida con ID: " + usuario);
 
         alertaCuentaCreada();
 
@@ -228,7 +228,7 @@ public class CrearCuentaController implements Initializable {
   public static void alertaNoCoinciden() {
     Alert alert = new Alert(Alert.AlertType.WARNING);
     alert.setTitle("Error");
-    alert.setContentText("Las contrasenyas no coinciden");
+    alert.setContentText("Las contraseñas no coinciden");
     alert.showAndWait();
   }
 

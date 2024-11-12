@@ -63,7 +63,7 @@ public class EventoController {
    * @throws FileNotFoundException Si ocurre un error al encontrar el archivo de
    *                               imagen.
    */
-  public void setDatos(Evento eventos) throws FileNotFoundException {
+  public void setDatos(Evento eventos) {
     evento = eventos;
     lblNombreEvento.setText(eventos.getNombreEvento());
     lblDescripcion.setText(eventos.getDescripcion());
@@ -71,8 +71,22 @@ public class EventoController {
     txtFecha.setText(eventos.getFecha());
     txtUbicacion.setText(eventos.getUbicacion());
 
-    Image imagen = new Image(new FileInputStream("imagenes" + "/" + eventos.getImagenEvento()));
-    cuadrado.setFill(new ImagePattern(imagen));
+    try {
+        // Intentar cargar la imagen localmente
+        String rutaLocal = "imagenes/" + eventos.getImagenEvento();
+        Image imagen = new Image(new FileInputStream(rutaLocal));
+        cuadrado.setFill(new ImagePattern(imagen));
+    } catch (FileNotFoundException e) {
+        // Si la imagen local no está disponible, cargarla desde la URL remota
+        System.out.println("Imagen local no encontrada, cargando desde URL remota.");
+        try {
+            Image imagenRemota = new Image(eventos.getImagenEvento());
+            cuadrado.setFill(new ImagePattern(imagenRemota));
+        } catch (Exception ex) {
+            System.err.println("Error al cargar la imagen remota: " + ex.getMessage());
+            ex.printStackTrace();
+        }
+    }
   }
 
   /**

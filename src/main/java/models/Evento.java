@@ -11,19 +11,17 @@ public class Evento {
   String imagenEvento;
   String descripcion;
 
-  public Evento(String nombreEvento, String artista, String ubicacion, String fecha, String imagenEvento,
-      String descripcion) {
+  // Constructor ajustado para aceptar los parámetros en el orden correcto
+  public Evento(String nombreEvento, String descripcion, String fecha, String imagenEvento, String artista, String ubicacion) {
     this.nombreEvento = nombreEvento;
-    this.artista = artista;
-    this.ubicacion = ubicacion;
+    this.descripcion = descripcion;
     this.fecha = fecha;
     this.imagenEvento = imagenEvento;
-    this.descripcion = descripcion;
+    this.artista = artista;
+    this.ubicacion = ubicacion;
   }
-  
-  public Evento() {
-    
-  }
+
+  public Evento() {}
 
   public String getNombreEvento() {
     return nombreEvento;

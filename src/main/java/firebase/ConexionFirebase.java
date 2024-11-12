@@ -24,7 +24,7 @@ public class ConexionFirebase {
     try {
       // Cargar el archivo de configuración desde el classpath
       GoogleCredentials credentials = GoogleCredentials.fromStream(ConexionFirebase.class.getClassLoader()
-          .getResourceAsStream("json/geomusic-95f90-firebase-adminsdk-66j1w-5a398500e4.json"));
+          .getResourceAsStream("json/geomusic-95f90-firebase-adminsdk-66j1w-1436686a85.json"));
 
       FirebaseOptions options = new FirebaseOptions.Builder().setCredentials(credentials)
           .setDatabaseUrl("https://geomusic-95f90.firebaseio.com/").build();
