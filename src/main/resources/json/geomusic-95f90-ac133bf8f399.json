@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "geomusic-95f90",
+  "private_key_id": "ac133bf8f3991ba040d1ff6dd5afd21d4944a8df",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDUyKxXl99EXFRJ\nux+WqNR1zK8O+rVjPiatdglhTVR3ZFDyys2kksUziJU7DwUdvqUmYStmlqfOLoL0\nZDUFzGfL3zZdvLAtLQGPoxbDq385B5pwaCEcSPkHbEMMLkj6j9LEhj47MaUjLDM6\nvSEPxDfND61htpDUGSUYpqZ/7tW7VslNnxBiEgSZaMkGMz212gVT38jmKkY3O0ip\n++qk5m4owP2fXHfz2YVErn0NBv8eN/FNnBzECf3ZWn0zyJvJAuniqBroZCBQY5Rc\n/mNUHqqy4Kgxog4bZIFeP3JvC1q73Y4KlzNuI0vl/7RVNnEsKtaLVAQYMdXHo36I\nYknX4PvfAgMBAAECggEAHLsP0i/2fJN+6gmzJTOcpF9Dz+D4NvNAY7GJaLL5Ubmg\n2Hebtrn+mIu7oqLPjQmd4QXDx3FWLRfIpNkW87Z62WNFQvjkTOVDzbI2s6rnXbry\nFnVo6xnLTj5G+1EQl4xt6A08P9/fLVWdgTPiT++tnSmdvpDZE1pl0ONHngSQpV++\neKZD0BNNUQqnb/MzhbhZnQNX+634S2nZ6sKAY5dfqQcIpuXhBA4HkglJLt0Z5ijy\niBckKiLWjGrQZwDCvFKDuKTE4pArd0sox3kjfsBEgvUlUEu3SfU9Nn0ZCbG2KOVs\nnjbiV8TcfpZFDxrvePMPz3pEs/oWeFaFTN/h55gzcQKBgQDjymqqeJTJkSt7la90\nGYAg+uHTaJdmXJV4xJkU5Kf8yWpDpV4jV3ZUN4r5c1p2d3iMk8uBUiuIRdykINNA\n6Fie1WbLqe6r4dM5JWPEvMARIn+TCEqTt9mIDOrfAG1ygMcikMFk7OuhO/2159iA\ngdm62Ew/QcPpg6OScX1q14LzaQKBgQDvIn/6dPTffQBGkM+ZVEL/tGlYuBmhWsYP\nLUO7KWki0PvlZvTuSbvQgraz4Tz1VUkjJA39KWZSpoRVXKNRTKcq4JLCuONjJbq8\nhNHvKf4j5l5a/D1AMQQghoX5Ciaa03GttOydvTZFOSFkmLQ4lpI8dhKrkyUJJ3mj\n9Lj9rqM0BwKBgQDI7TNJSzNy2OpSCKbK8fNjI+kuYYOqduAhtsiQ9WB4SfHB2YxA\nAFYP0y5y+p1BAgEDfxpy59geTAFjhNDS4B/LetFBtJMiaf+22JQ4ZYXFl3iQaS/f\nPLxUlZBXRDlGVvFQO/9a1uDBR/lzCx6du+wiM8iNw6TbxZHzCshmBdMsgQKBgGJs\nkrwlMzxhGKHyrF9xfPn96XYon/P3hplsifoYuzsnROZQj/Mbyf+yLTywMgTQC4A5\nMMDIL2NJQiJYNKgboppVQFKBAqYmO0uoZzfG0uE3yhIsy5EGG6q/c5jjAqyq5pkW\nZGUwIYwwTXw4FcVMw/e6qUiREadI5hoDebiADpA1AoGAAnPBWXyju+nbWpyU9lQ4\njESocXUz0aCR34LhVUZhtUu79nRdjdl6KrMvEF8Gvo2yiBwjKSUkhE3PinOKXCtu\nbKpEOHq7MUGcmPV52afpZf33Rh1DZZfT2qk4CeYnl5JsMzRpUCpbai0/gZyxxoQO\nqJfv3DRlml0NSdqmEeMSvU0=\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-66j1w@geomusic-95f90.iam.gserviceaccount.com",
+  "client_id": "108411101205037556928",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-66j1w%40geomusic-95f90.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

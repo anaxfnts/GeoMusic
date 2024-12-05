@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="505.0" prefWidth="1346.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.AddEventoController">
+   <children>
+      <Pane layoutX="14.0" layoutY="16.0" prefHeight="473.0" prefWidth="1145.0">
+         <children>
+            <Label layoutX="365.0" layoutY="295.0" text="Ubicación" textFill="#d886ff">
+               <font>
+                  <Font name="Arial Black" size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="679.0" layoutY="128.0" prefHeight="23.0" prefWidth="75.0" text="Fecha" textFill="#d886ff">
+               <font>
+                  <Font name="Arial Black" size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="365.0" layoutY="211.0" text="Artista" textFill="#d886ff">
+               <font>
+                  <Font name="Arial Black" size="15.0" />
+               </font>
+            </Label>
+            <Label ellipsisString="" layoutX="675.0" layoutY="212.0" text="Descripción" textFill="#d886ff">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="365.0" layoutY="128.0" text="Nombre evento" textFill="#d886ff">
+               <font>
+                  <Font name="Arial Black" size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="133.0" layoutY="22.0" prefHeight="74.0" prefWidth="287.0" text="Añadir evento" textFill="#d886ff">
+               <font>
+                  <Font name="Arial Black" size="37.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtNombreEvento" layoutX="365.0" layoutY="153.0" prefHeight="32.0" prefWidth="201.0" />
+            <TextField fx:id="txtArtista" layoutX="365.0" layoutY="233.0" prefHeight="32.0" prefWidth="201.0" />
+            <ComboBox fx:id="ubicacion" layoutX="365.0" layoutY="318.0" prefHeight="32.0" prefWidth="201.0" />
+            <TextField fx:id="txtFecha" layoutX="679.0" layoutY="153.0" prefHeight="32.0" prefWidth="201.0" />
+            <Button fx:id="btnGuardar" layoutX="864.0" layoutY="421.0" mnemonicParsing="false" onMouseClicked="#crearEvento" prefHeight="43.0" prefWidth="144.0" style="-fx-background-color: #d886ff; -fx-background-radius: 40;" text="Guardar">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </Button>
+            <TextField fx:id="txtDescripcion" layoutX="679.0" layoutY="233.0" prefHeight="32.0" prefWidth="201.0" />
+            <Label ellipsisString="" layoutX="679.0" layoutY="296.0" text="Imagen" textFill="#d886ff">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtImagenURL" layoutX="680.0" layoutY="318.0" prefHeight="32.0" prefWidth="201.0" />
+            <Label layoutX="772.0" layoutY="128.0" prefHeight="23.0" prefWidth="102.0" text="(DD-MM-YYYY)" textFill="#d886ff">
+               <font>
+                  <Font name="System Bold Italic" size="13.0" />
+               </font>
+            </Label>
+            <Label layoutX="827.0" layoutY="295.0" prefHeight="23.0" prefWidth="37.0" text="(URL)" textFill="#d886ff">
+               <font>
+                  <Font name="System Bold Italic" size="13.0" />
+               </font>
+            </Label>
+            <CheckBox fx:id="checkBoxDisponible" alignment="CENTER" layoutX="361.0" layoutY="388.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="119.0" text="Disponible" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </CheckBox>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

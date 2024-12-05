@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"application"},{"l":"firebase"},{"l":"models"},{"l":"utils"},{"l":"views"}];updateSearchResults();

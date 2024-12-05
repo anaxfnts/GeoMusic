@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox spacing="10" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.ReviewController">
+    <padding>
+        <Insets bottom="10" left="10" right="10" top="10" />
+    </padding>
+   <children>
+       <Label text="Reviews publicadas:" textFill="#d886ff">
+         <font>
+            <Font name="System Bold" size="25.0" />
+         </font></Label>
+       <ListView fx:id="reviewList" prefHeight="200" style="-fx-background-color: white;" />
+       <HBox spacing="10">
+          <children>
+              <TextField fx:id="reviewField" promptText="Escribe tu opinión" HBox.hgrow="ALWAYS" />
+              <TextField fx:id="ratingField" maxWidth="50" promptText="Nota" />
+              <Button onAction="#postReview" style="-fx-background-color: #d886ff;" text="Publicar">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Button>
+          </children>
+       </HBox>
+   </children>
+</VBox>
